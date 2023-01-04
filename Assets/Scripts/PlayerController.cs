@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private Rigidbody2D rb;
     private int health;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         speed = 500f;
         health = 5;
         rb = this.GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     public void damagePlayer(int dmg){
@@ -31,5 +33,12 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         rb.velocity = movement * speed * Time.deltaTime;
+    }
+
+    void FixedUpdate(){
+        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            animator.SetBool("isWalking", true);
+        else
+            animator.SetBool("isWalking", false);
     }
 }
