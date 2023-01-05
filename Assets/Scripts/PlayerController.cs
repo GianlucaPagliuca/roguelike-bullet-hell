@@ -36,9 +36,18 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate(){
-        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0){
             animator.SetBool("isWalking", true);
-        else
+            animator.SetBool("isRunning", Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? true : false);
+
+            
+        }
+        else{
             animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", false);
+        }
+
+        animator.SetFloat("inputHorizontal", Input.GetAxis("Horizontal"));
+        animator.SetFloat("inputVertical", Input.GetAxis("Vertical"));
     }
 }
