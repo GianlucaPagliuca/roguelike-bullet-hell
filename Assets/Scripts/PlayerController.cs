@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = 500f;
+
         health = 5;
         rb = this.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -29,31 +29,38 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+    float originSpeed = 0;
     void Update()
     {
-        float horizontalValue = Input.GetAxis("Horizontal");
+        
+        if(Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)){
+            originSpeed = speed;
+            speed = 4.0f;
+        }
 
+        if(Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)){
+            speed = originSpeed;
+        }
+
+        float horizontalValue = Input.GetAxis("Horizontal");
         float verticalValue = Input.GetAxis("Vertical");
+        bool shiftHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? true : false;
 
         Vector2 movement = new Vector2(horizontalValue, verticalValue);
         rb.velocity = movement * speed;
 
-        //put the animator controlls changing here dependinng on horizontal/verticalValue
-    }
+        
 
-    void FixedUpdate(){
-        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0){
+
+        if(horizontalValue != 0 || verticalValue != 0){
             animator.SetBool("isWalking", true);
-            animator.SetBool("isRunning", Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? true : false);
-
-            
-        }
-        else{
+            animator.SetBool("isRunning", shiftHeld);
+        }else{
             animator.SetBool("isWalking", false);
             animator.SetBool("isRunning", false);
         }
 
-        animator.SetFloat("inputHorizontal", Input.GetAxis("Horizontal"));
-        animator.SetFloat("inputVertical", Input.GetAxis("Vertical"));
+        animator.SetFloat("inputHorizontal", horizontalValue);
+        animator.SetFloat("inputVertical", verticalValue);
     }
 }
