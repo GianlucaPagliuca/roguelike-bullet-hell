@@ -31,8 +31,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        rb.velocity = movement * speed * Time.deltaTime;
+        float horizontalValue = Input.GetAxis("Horizontal");
+
+        float verticalValue = Input.GetAxis("Vertical");
+
+        Vector2 movement = new Vector2(horizontalValue, verticalValue);
+        rb.velocity = movement * speed;
+
+        //put the animator controlls changing here dependinng on horizontal/verticalValue
     }
 
     void FixedUpdate(){
