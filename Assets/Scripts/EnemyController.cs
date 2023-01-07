@@ -36,9 +36,9 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D col){
+    void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.CompareTag("Player")){
-            col.gameObject.GetComponent<PlayerController>().damagePlayer(1);
+            col.gameObject.GetComponent<PlayerController>().damagePlayer(10);
 
             SpawnNewEnemy(col.gameObject, true, 0);
         }

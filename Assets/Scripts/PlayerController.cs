@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
-        health = 5;
+        health = 100;
         rb = this.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Game Over");
 
         Debug.Log(health);
+    }
+
+    public void healPlayer(int heal){
+        health += heal;
     }
 
     // Update is called once per frame
