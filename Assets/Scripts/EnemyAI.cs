@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         //Repeats a function a function for after nSeconds and starts it after a nSeconds Delay
-        InvokeRepeating("UpdatePath", 0f, .5f);
+        InvokeRepeating("UpdatePath", 0f, .25f);
     }
 
     void UpdatePath(){
@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour
         if (path == null)
             return;
 
-        if(currentWaypoint >= path.vectorPath.Count){
+        if(currentWaypoint > path.vectorPath.Count){
             reachedEndOfPath = true;
             return;
         } else{
