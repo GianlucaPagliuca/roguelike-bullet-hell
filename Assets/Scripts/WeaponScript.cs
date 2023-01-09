@@ -5,10 +5,11 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour
 {
     private Transform player;
-    public float maxDistance = 2.0f;
+    private float maxDistance;
 
     private void Start(){
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        maxDistance = player.GetComponent<PlayerController>().bowDistance;
     }
 
     void UpdatePosition() {

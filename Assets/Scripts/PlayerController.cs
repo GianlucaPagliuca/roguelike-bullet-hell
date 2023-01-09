@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private int health;
     private Animator animator;
+    public float bowDistance = 2.0f;
+
     // Start is called before the first frame update
     void Start()
     {
