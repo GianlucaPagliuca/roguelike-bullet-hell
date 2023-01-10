@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
             health -= dmg;
         else
             Debug.Log("Game Over");
-
-        Debug.Log(health);
     }
 
     public void healPlayer(int heal){
